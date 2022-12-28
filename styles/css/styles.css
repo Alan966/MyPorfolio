@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Chivo+Mono:ital,wght@1,100;1,300&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; }
+
+body {
+  background-color: #F4F0D6;
+  width: 100%; }
+
+header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0;
+  margin: 1em;
+  border: 0; }
+  header .content_1 .img_header {
+    width: 3em;
+    height: 3em; }
+  @media screen and (min-width: 320px) and (orientation: landscape) {
+    header .content_2 ul li {
+      display: inline-block;
+      margin: 0 1em; }
+    header .content_2 ul li a {
+      text-decoration: none;
+      font-family: monospace;
+      font-size: 1em; } }
+  header .list_ul {
+    display: none; }
+
+.button {
+  width: 2.5rem;
+  height: 2rem;
+  background-color: #F4F0D6;
+  position: relative;
+  cursor: pointer;
+  transition: transform 0.25s; }
+  .button::before {
+    content: '';
+    display: block; }
+  .button::after {
+    content: '';
+    display: block; }
+  .button::before, .button::after,
+  .button .line {
+    position: absolute;
+    width: 100%;
+    height: 3px;
+    background: black;
+    transition: all 0.25s; }
+  .button::before {
+    top: 0; }
+  .button .line {
+    top: 50%;
+    transform: translateY(-50%); }
+  .button::after {
+    bottom: 0; }
+
+.button.active {
+  transform: rotate(180deg);
+  transform: translateX(-10em); }
+  .button.active .line {
+    display: none; }
+  .button.active::before {
+    top: 50%;
+    transform: translateY(-50%) rotate(45deg); }
+  .button.active::after {
+    bottom: 50%;
+    transform: translateY(50%) rotate(-45deg); }
+  .button.active .list_ul {
+    display: block;
+    background-color: #B56824;
+    border-radius: 0.6rem;
+    transform: translateX(4em) translateY(-2em);
+    position: relative;
+    width: 7.5em;
+    margin: 1em; }
+  .button.active .list_ul li {
+    list-style: none; }
+  .button.active .list_ul li a {
+    text-decoration: none;
+    color: white;
+    font-family: monospace;
+    font-size: 1.4em;
+    margin: 0.5em; }
+
+.main {
+  display: flex;
+  justify-content: center; }
+  .main .section {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    margin: 2.5em; }
+
+.img_iam {
+  width: 35vh;
+  order: 1;
+  z-index: 10; }
+
+.container {
+  position: relative; }
+
+.container::before {
+  content: '';
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: white;
+  margin: 0;
+  left: 0;
+  z-index: 0;
+  outline: 8px ridge rgba(170, 50, 220, 0.6);
+  border-radius: 2rem;
+  opacity: 0.6; }
+
+.section_h1 {
+  font-family: monospace;
+  font-size: 1.4em;
+  color: black;
+  margin: 0em;
+  order: -1; }
+
+.p_section {
+  font-family: "Chivo Mono";
+  font-size: 1em;
+  color: black;
+  margin: 0em; }
