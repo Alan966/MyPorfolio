@@ -1,38 +1,99 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Porfolio</title>
-    <link rel="stylesheet" href="../styles/css/styles.css">
+    <link rel="stylesheet" href="../styles/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300&family=Edu+NSW+ACT+Foundation:wght@500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <header>
+    <header id="header" class="header">
         <div class="content_1">
             <img class="img_header" src="../images/navegador-web.png" alt="Imagen from navigator">
         </div>
         <div class="content_2 button" id="content_2">
-            <ul class="list_ul">
-                <li><a href="./"> Me </a></li>
-                <li><a href="./"> Projects </a></li>
-                <li><a href="./">  Experience </a></li>
-                <li><a href="./">  Contact </a></li>
+            <div id="hamburger" class="hamburguer_button"></div>
+            <ul id="list_ul" class="list_ul">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
             </ul>
         </div>
     </header>
     <main class="main">
+        <div id="div_button"></div>
         <section class="section">
-            <div class="container">
-                <h1 class="section_h1"> Hi! I'm Alan </h1>
-                <p class="p_section">I'm Fullstrack Developer</p>
-                <img
-                class="img_iam"
-                src="../images/Im.png"
-                alt="I'm">
+            <div class="container_card">
+               <div>
+                <h1 id="title_card" class="section_h1"> </h1>
+                <p id="p_card" class="p_section"></p>
+               </div>
+                <div class="container_image">
+                    <img
+                    class="img_card"
+                    src="../images/Im.png"
+                    alt="I'm">
+                </div>
             </div>
         </section>
     </main>
-    <script src="../scripts/index.js" type="module"></script>
+    <section id="me" class="section_me">
+        <div class="about_me">
+            <h2 id="title_about_me" class="title">
+            </h2>
+            <div class="p_about_me">
+                <div id="description_about_me">
+                </div>
+                <ul id="list_I_learn">
+                </ul>
+                now I am looking for a job as a Fullstack Developer,
+            </div>
+        </div>
+        <div class="gallery">
+            <div class="content">
+                <img src="../images/lenguages/css.png" alt="css">
+                <p>css</p>
+            </div>
+            <div class="content">
+                <img src="../images/lenguages/databasesql.png" alt="sql">
+                <p>Database Sql</p>
+            </div>
+            <div class="content">
+                <img src="../images/lenguages/git.png" alt="git">
+                <p>Git</p>
+            </div>
+            <div class="content">
+                <img src="../images/lenguages/html.png" alt="html">
+                <p>HTMl</p>
+            </div>
+            <div class="content">
+                <img src="../images/lenguages/js.png" alt="js">
+                <p>Javascript</p>
+            </div>
+            <div class="content">
+                <img src="../images/lenguages/mongodb.png" alt="mongodb">
+                <p>mongoDb</p>
+            </div>
+            <div class="content">
+                <img src="../images/lenguages/nodejs.png" alt="nodejs">
+                <p>Nodejs</p>
+            </div>
+            <div class="content">
+            <img src="../images/lenguages/react.png" alt="react">
+            <p>React</p>
+            </div>
+            <div class="content">
+                <img src="../images/lenguages/sass.png" alt="sass">
+                <p>Sass</p>
+            </div>
+        </div>
+    </section>
+    <!-- <a href="https://www.flaticon.es/iconos-gratis/instagram" title="instagram iconos">Instagram iconos creados por Freepik - Flaticon</a> -->
+    <script src="../js/index.js" type="module"></script>
 </body>
 </html>
