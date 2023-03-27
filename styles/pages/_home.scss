@@ -1,0 +1,10 @@
+main.main{
+    margin: 0;
+    background-color: $dark_blue;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+@import "../components/card.scss";

@@ -1,0 +1,28 @@
+%button{
+    margin: 0.5rem 1rem;
+        height: 2rem;
+        width: 4rem;
+        font-family: $title-font;
+        font-size: $font-medium;
+        text-align: center;
+}
+
+#div_button{
+    width: 100%;
+    // height: 2rem;
+    display: flex;
+    justify-content: flex-end;
+    .button_lenguage{
+        @extend %button;
+        background-color: $dark_green;
+        border: 1px solid black;
+        font-family: $body-font;
+        font-size: $font-medium;
+        border: 0.5rem;
+        @include shadowBox();
+        cursor: pointer;
+        &:hover{
+            background-color: $lemon_green;
+        }
+    }
+}

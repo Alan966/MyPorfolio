@@ -1,0 +1,94 @@
+.container_card{
+    display: grid;
+    @include max-weight(500){
+        display: flex;
+        flex-direction: column;
+    }
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( to right ,$gold, $white);
+    margin: 1rem;
+    width: 80vw;
+    border: 4px solid $black;
+    border-radius: 1rem;
+    @include min-weight(900){
+        width: 70vw;
+    }
+    @include min-weight(1200){
+        width: 50vw;
+    }
+    .section_h1{
+        margin: 0;
+        padding: 0;
+        font-family: $title-font;
+        @include min-weight(501){
+            @include grid-column(1, 2);
+            padding: 0 1rem;
+        }
+        @include min-weight(650){
+            @include grid-column(1, 2);
+            padding: 0 3rem;
+            font-size: $font-xlarge;
+        }
+        @include min-weight(1000){
+            @include grid-column(1, 2);
+            padding: 1rem 5rem;
+            font-size: $font-xxlarge;
+        }
+    }
+    .p_section{
+        margin: 0;
+        padding: 0;
+        font-family: $body-font;
+        font-size: $font-medium;
+        @include min-weight(501){
+            @include grid-column(1, 2);
+            padding: 0 1rem;
+            $font-size: $font-large;
+        }
+        @include min-weight(650){
+            @include grid-column(1, 2);
+            padding: 0 3rem;
+            $font-size: $font-xlarge;
+        }
+        @include min-weight(1000){
+            @include grid-column(1, 2);
+            padding-left: 5rem;
+            $font-size: $font-large;
+        }
+    }
+    .container_image{
+        padding: 0;
+        @include max-weight(530){
+           @include orientation(portrait){
+            // width: 80vw;
+            // height: 60vh;
+            background: linear-gradient( to left ,$gold, $white) ;
+           }
+        }
+        @include min-weight(531){
+            position: relative;
+            align-items: flex-end;
+            justify-content: flex-end;
+            @include grid-column(2, 3);
+            height: 25rem;
+            // padding: 0 10%;
+            text-align: center;
+        }
+        @include min-weight(701){
+            height: 25rem;
+        }
+        @include min-weight(901){
+            height: 35rem;
+            padding-left: 5rem;
+        }
+        @include min-weight(1200){
+            padding: 0;
+            padding-left: 7rem;
+        }
+        .img_card{
+            @include img();
+            position: relative;
+        }
+    }
+}

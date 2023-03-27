@@ -1,0 +1,5 @@
+@function columns($columns, $size){
+    @if type-of($columns) == number and type-of($size) == number{
+        @return repeat($columns, $size);
+    }
+};

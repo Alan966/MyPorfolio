@@ -1,0 +1,114 @@
+@mixin grid_columns($columns, $size, $gap){
+    @if type-of($columns) == number and unit($size) == 'px' or
+    unit($size) == 'em' or unit($size) == 'rem' or unit($size) == '%'
+    or unit($size) == 'fr'{
+        grid-template-columns: columns($columns, $size);
+    }
+    @if $gap != null{
+        grid-column-gap: $gap;
+    }
+};
+
+
+@mixin orientationAndMax($orientation, $size){
+    $screen : null;
+    @if $size == 'smarthphone' or $size == 'desktop'{
+        $screen: '9 / 16';
+    } @else if $size == 'tablet'{
+        $screen: '3 / 4';
+    }
+    @if $orientation == 'portrait' {
+        @media screen and  (orientation: portrait) and (max-aspect-ratio: unquote($screen)){
+            @content;
+        }
+    }
+    @else if $orientation == 'landscape'{
+        @media screen and (orientation: landscape) and (min-aspect-ratio: unquote($screen)){
+            @content;
+        }
+    }
+    @else{
+        @content;
+    }
+};
+@mixin orientation($orientation){
+    @if $orientation == 'portrait' {
+        @media screen and  (orientation: portrait){
+            @content;
+        }
+    }
+    @else if $orientation == 'landscape'{
+        @media screen and (orientation: landscape){
+            @content;
+        }
+    }
+    @else{
+        @content;
+    }
+}
+@mixin min-weight($weight){
+    @media screen and (min-width: #{$weight}px){
+        @content;
+    }
+}
+@mixin max-weight($weight){
+    @media screen and (max-width: #{$weight}px){
+        @content;
+    }
+}
+@mixin weight($weight){
+    @media screen and (width: #{$weight}px){
+        @content;
+    }
+}
+
+@mixin grid-column($first, $end: null, $span: null){
+    @if type-of($first) == number and type-of($end) == number and $span == null{
+        grid-column: unquote('#{$first}/ #{$end}');
+    }
+    @else if type-of($first) == number and type-of($end) == number and $span != null{
+        grid-column: unquote('#{$first}  / span #{$end}');
+    }
+    @else if type-of($first) == number and $end == null and $span == null{
+        grid-column: $first;
+    }
+}
+
+@mixin img(){
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+@mixin shadowBox(){
+    box-shadow: 0.5rem 0.5rem 0.5rem 0.29rem $black;
+}
+
+@mixin line(){
+    background: $white;
+    border-radius: 0.2rem;
+    height: 0.3rem;
+    width: 4rem;
+}
+
+@mixin title(){
+    @if $color{
+        color: $white;
+    }
+    @else{
+        color: $black;
+    }
+    font-size: $font-xlarge;
+    font-family: $title-font;
+    text-align: center;
+}
+
+@mixin text(){
+    background: linear-gradient( to bottom ,$pastel_blue, $white) ;
+    margin: 1rem;
+    color: $black;
+    font-size: $font-size;
+    border:  1px solid $black;
+    padding: 0.3rem;
+    border-radius: 0.6rem;
+}
