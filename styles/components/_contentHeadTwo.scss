@@ -1,0 +1,45 @@
+$width: 100% !default;
+$height: 100% !default;
+$properties:(
+    normal: (
+        width: $width,
+        height: $height,
+        display: flex,
+        justify-content: center,
+        align-items: center
+    ),
+    active:(
+        justify-content: flex-end,
+        position: relative
+    ),
+    tablet:(
+        position: relative
+    ),
+    desktop:(
+        align-items: flex-start
+    )
+);
+%content_2{
+    @include grid-column(3);
+    @each $property, $value in map-get($properties, normal){
+        #{$property}: $value;
+    }
+    &.active{
+        @each $property, $value in map-get($properties, active){
+            #{$property}: $value;
+        }
+    }
+    @include min-weight(540){
+        @include grid-column(2, 2, span);
+        @each $property, $value in map-get($properties, tablet){
+            #{$property}: $value;
+        }
+    }
+    @include orientation(landscape){
+    @include min-weight(912){
+        @include grid-column(2,3, span);
+        @each $property, $value in map-get($properties, desktop){
+            #{$property}: $value;
+        }}
+    }
+}

@@ -2,17 +2,39 @@ import "./header.js";
 
 let divButtonLenguage = document.getElementById('div_button');
 var userLang = navigator.language || navigator.userLanguage;
-divButtonLenguage.innerHTML = `<button id="buttonlenguage" class="button_lenguage">${userLang}</button>`;
+
+const cleanChildElement = (element) => {
+    element.childElementCount > 0 ?
+        element.removeChild(element.children[0]) : null;
+}
+const insertElement = (oldElement, newElement) => {
+    oldElement.appendChild(newElement);
+}
+const createElementContent = (element, classElement, textContent, idElement, href) => {
+    const newElement = document.createElement(element);
+    newElement.classList.add(classElement);
+    newElement.textContent = textContent;
+    newElement.setAttribute('id', idElement);
+    if (href) {
+        newElement.setAttribute('href', href);
+    }
+    return newElement;
+}
+cleanChildElement(divButtonLenguage);
+insertElement(divButtonLenguage, createElementContent('button', 'button_lenguage', userLang, 'buttonlenguage'));
 document.getElementById('buttonlenguage').addEventListener('click', () => {
-    contentCard(userLang);
-    contentAboutMe(userLang);
+
     if (userLang === 'es') {
-        // contentInEspHeader();
         userLang = 'en';
+        contentCard(userLang);
+        contentAboutMe(userLang);
+        contentHeader(userLang);
         document.getElementById('buttonlenguage').textContent = `${userLang}`;
-    } else {
-        // contentInEngHeader();
+    } else if (userLang === 'en') {
         userLang = 'es';
+        contentCard(userLang);
+        contentAboutMe(userLang);
+        contentHeader(userLang);
         document.getElementById('buttonlenguage').textContent = `${userLang}`;
     }
 })
@@ -24,19 +46,29 @@ const projects = ullist.children[1];
 const experience = ullist.children[2];
 const contact = ullist.children[3];
 
-const contentInEspHeader = () => {
-    me.innerHTML = '<a href="#me">Sobre mi</a>';
-    projects.innerHTML = '<a href="/>Proyectos</a>';
-    experience.innerHTML = '<a href="/>Experiencia</a>';
-    contact.innerHTML = '<a href="/">Contacto</a>';
+
+
+const contentHeader = (lenguage) => {
+    cleanChildElement(me);
+    cleanChildElement(projects);
+    cleanChildElement(experience);
+    cleanChildElement(contact);
+
+    if (lenguage === 'es') {
+        insertElement(me, createElementContent('a', 'link', 'Sobre mi', 'link', '#me'))
+        insertElement(projects, createElementContent('a', 'link', 'Proyectos', 'link', '/'))
+        insertElement(experience, createElementContent('a', 'link', 'Experiencia', 'link', '/'))
+        insertElement(contact, createElementContent('a', 'link', 'Contacto', 'link', '/'))
+    } else if (lenguage === 'en') {
+        insertElement(me, createElementContent('a', 'link', 'About me', 'link', '#me'));
+        insertElement(projects, createElementContent('a', 'link', 'Projects', 'link', '/'));
+        insertElement(experience, createElementContent('a', 'link', 'Experience', 'link', '/'));
+        insertElement(contact, createElementContent('a', 'link', 'Contact', 'link', '/'));
+    }
 };
 
-const contentInEngHeader = () => {
-    me.innerHTML = '<a href="#me">About me</a>';
-    projects.innerHTML = '<a href="/">Projects</a>';
-    experience.innerHTML = '<a>Experience</a>';
-    contact.innerHTML = '<a href="/">Contact</a>';
-};
+
+contentHeader(userLang);
 
 //section card
 const titleCard = document.getElementById('title_card');
@@ -57,8 +89,7 @@ contentCard(userLang);
 const titleAboutMe = document.getElementById('title_about_me');
 const description = document.getElementById('description_about_me');
 const list = document.getElementById('list_I_learn');
-
-
+const title_gallery = document.getElementById('title_gallery');
 const contentAboutMe = (lenguage) => {
     if (lenguage === 'es') {
         titleAboutMe.textContent = 'Sobre mi';
@@ -84,11 +115,13 @@ const contentAboutMe = (lenguage) => {
         era el encargado de conectar el sistema de las empresas de transporte con el sistema
         de la empresa por medio de API's, aprendi mucho en mi intership y me encanto la experiencia
         , ahora estoy buscando un trabajo como desarrollador Fullstack con Javascript,
-        cosas que aprendi en mi inthership:
         </p>
             <img class="img_about" src="../images/content/otif.png"/>
         `
         list.innerHTML = `
+        <p class="introduction" id="introduction">
+        Cosas que aprendi en mi intership:
+        </p>
         <li>Manejo de Apis Reales</li>
         <li>Trabajar en un proyecto en la nube de google cloud</li>
         <li>Manejo de Git</li>
@@ -98,7 +131,7 @@ const contentAboutMe = (lenguage) => {
         <li>Uso de librerias para nodejs</li>
         <li>Trabajo en equipo</li>
         `
-
+        introduction.textContent = `Cosas que aprendi en mi intership:`
     } else if (lenguage === 'en') {
         titleAboutMe.textContent = 'About me';
         description.innerHTML = `
@@ -123,11 +156,13 @@ const contentAboutMe = (lenguage) => {
         i was in charge of connecting the system of the companies about transport with the company's system
         through API's, I learned a lot in my intership and I loved the experience,
         now I'm looking for a job as a Fullstack developer with Javascript
-        things I learned in my intership:
         </p>
         <img class="img_about" src="../images/content/otif.png"/>
         `
         list.innerHTML = `
+        <p class="introduction" id="introduction">
+            Things I learned in my intership:
+        </p>
         <li>managment of really API's</li>
         <li>Work in a project there in google cloud</li>
         <li>Git managment</li>
@@ -140,11 +175,3 @@ const contentAboutMe = (lenguage) => {
     }
 }
 contentAboutMe(userLang);
-
-if (userLang === 'es') {
-    contentInEspHeader();
-} else if (userLang === 'en') {
-    contentInEngHeader();
-}
-
-

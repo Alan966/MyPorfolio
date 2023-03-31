@@ -1,11 +1,15 @@
-@mixin grid_columns($columns, $size, $gap){
+@mixin grid_columns($columns, $size, $gap: null){
     @if type-of($columns) == number and unit($size) == 'px' or
     unit($size) == 'em' or unit($size) == 'rem' or unit($size) == '%'
     or unit($size) == 'fr'{
-        grid-template-columns: columns($columns, $size);
+        grid-template: {
+            columns:columns($columns, $size);
+        }
     }
     @if $gap != null{
-        grid-column-gap: $gap;
+        grid-column: {
+            gap:$gap;
+        }
     }
 };
 
@@ -28,6 +32,18 @@
         }
     }
     @else{
+        @content;
+    }
+};
+
+@mixin max-aspect-ratio($size){
+    $screen : null;
+    @if $size == 'smarthphone' or $size == 'desktop'{
+        $screen: '9 / 16';
+    } @else if $size == 'tablet'{
+        $screen: '3 / 4';
+    }
+    @media screen and (max-aspect-ratio: unquote($screen)){
         @content;
     }
 };
@@ -84,11 +100,19 @@
     box-shadow: 0.5rem 0.5rem 0.5rem 0.29rem $black;
 }
 
-@mixin line(){
+@mixin line($next: null){
     background: $white;
     border-radius: 0.2rem;
     height: 0.3rem;
     width: 4rem;
+
+    @if $next{
+        &::before,
+        &::after{
+            position: absolute;
+            display: block;
+        }
+    }
 }
 
 @mixin title(){
@@ -111,4 +135,50 @@
     border:  1px solid $black;
     padding: 0.3rem;
     border-radius: 0.6rem;
+}
+
+@mixin typemap($key){
+    @if $key == 'hover'{
+        &:hover{
+            @content;
+        }
+    }
+    @else if $key == 'active'{
+        &.active{
+            @content;
+        }
+    }
+    @else if $key == 'before'{
+        &::before{
+            @content;
+        }
+    }
+    @else if $key == 'after'{
+        &::after{
+            @content;
+        }
+    }
+    @else if str-slice($key, 0, 3)== 'max'{
+        @include max-weight(str-slice($key, 5, str-length($key))){
+            @content;
+        }
+    }
+    @else if str-slice($key, 0, 3)== 'min'{
+        @include min-weight(str-slice($key, 5, str-length($key))){
+            @content;
+        }
+    }
+}
+
+@mixin runingMap($map){
+    @each $key, $value in $map{
+        @if type-of($value) != map{
+            #{$key} : $value;
+        }
+        @else{
+            @include typemap($key){
+                @include runingMap($value);
+            }
+        }
+    }
 }

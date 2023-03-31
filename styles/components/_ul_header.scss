@@ -1,0 +1,77 @@
+$properties:(
+    max-539:(
+        display: none,
+        parn-active:(
+            display:flex,
+            flex-direction: column,
+            justify-content: center,
+            top: 1rem,
+            right: 2rem,
+            height: 8rem,
+            border-radius: 1rem,
+            border: 2px solid $black,
+            width: 10rem,
+            position: absolute,
+            background: $lemon_green,
+            z-index: 10
+        )
+    ),
+    min-540:(
+        position: absolute,
+        width: 100%,
+        display: flex,
+        justify-content: space-around,
+        align-items: center,
+    ),
+    ori-lanscape:(
+        position: relative,
+        align-items: flex-start,
+    ),
+    min-915:(
+        margin-top: 1rem,
+        position: absolute,
+        width: 100%,
+        padding: 0,
+        justify-content: space-around,
+    ),
+);
+
+
+
+
+%ul_header{
+    @for $i from 1 through length(map-keys($properties)){
+        $second: nth(map-keys($properties), $i);
+        @if str-slice($second, 0, 3) == 'min'{
+            @include min-weight(str-slice($second, 5, str-length($second))){
+                @each $property, $value in map-get($properties, $second){
+                    #{$property}: $value;
+                }
+            }
+        }
+        @if str-slice($second, 0, 3) == 'ori'{
+            @include orientation(str-slice($second, 5, str-length($second))){
+                @each $property, $value in map-get($properties, $second){
+                    #{$property}: $value;
+                }
+            }
+        }
+        @if str-slice($second, 0, 3) == 'max'{
+            @include max-weight(str-slice($second, 5, str-length($second))){
+                @each $property, $value in map-get($properties, $second){
+                    @if type-of($value) == 'map'{
+                        @if str-slice(map-name-in-parent(map-get($properties,$second), $value), 0, 4) == 'parn'{ // parent
+                            @at-root .content_2.active &{
+                                @each $property, $values in $value{
+                                    #{$property}: #{$values};
+                                }
+                            }
+                        }
+                    }@else{
+                        #{$property}: $value;
+                    }
+                }
+            }
+        }
+    }
+}

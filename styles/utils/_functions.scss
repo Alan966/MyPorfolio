@@ -3,3 +3,15 @@
         @return repeat($columns, $size);
     }
 };
+
+
+@function map-name-in-parent($parent, $child) {
+    @each $name, $value in $parent{
+        @if type-of($value) == 'map'{
+            @if $value == $child{
+                @return $name;
+            }
+        }
+    }
+    @error null;
+  }

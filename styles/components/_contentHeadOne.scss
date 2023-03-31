@@ -1,0 +1,51 @@
+$properties: (
+    normal:(
+        width: 6rem,
+        height: 4rem,
+        margin: 0 1rem
+    ),
+    tablet: (
+        width: 6rem,
+        height: 4rem,
+        margin: 0 1rem
+    ),
+    smarthphone: (
+        width: 5rem,
+        height: 3rem,
+        margin: 0.5em
+    ),
+    desktop: (
+        width: 8rem,
+        height: 6rem,
+        margin: 0 2rem
+    )
+);
+
+%content_1{
+    @include grid-column(1, 1, span);
+    position: relative;
+    top: 0;
+    width: map-get(map-get($properties, normal),width);
+    height: map-get(map-get($properties,normal),height);
+    margin: map-get(map-get($properties, normal),margin);
+    .img_header{
+        @include img();
+    }
+    @include orientation(portrait){
+    @include min-weight(540){
+            width: map-get(map-get($properties, tablet),width);
+            height: map-get(map-get($properties, tablet),height);
+            margin: map-get(map-get($properties, tablet),margin);
+        }
+    }
+    @include orientation(landscape){
+            width: map-get(map-get($properties, smarthphone ), width);
+            height: map-get(map-get($properties,smarthphone ), height);
+            margin: map-get(map-get($properties, smarthphone), margin);
+        }
+        @include min-weight(915){
+        width: map-get(map-get($properties, desktop), width);
+        height: map-get(map-get($properties, desktop), height);
+        margin:  map-get(map-get($properties, desktop), margin);
+    }
+}
