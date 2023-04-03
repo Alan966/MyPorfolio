@@ -1,9 +1,8 @@
-@import '../components/contentHeadOne';
-@import '../components/contentHeadTwo';
-@import '../components/ul_header';
-@import '../components/li_header';
-
-
+@import '../components/header/contentHeadOne';
+@import '../components/header/contentHeadTwo';
+@import '../components/header/ul_header';
+@import '../components/header/li_header';
+@import '../components/header/hamburger_button';
 
 
 header{
@@ -12,73 +11,41 @@ header{
         width: 100%;
         max-height: 30vh;
 
+        @include orientationAndMax(portrait, tablet){
+            background-color: $pastel_blue;
+            @include grid_columns(3, 1fr, 1rem);
+            justify-content: end;
+            align-items: center;
+                @include min-weight(540){
+                justify-content: center;
+            }
+        }
+        @include orientationAndMax(landscape, desktop){
+            @include grid_columns(3, 1fr, 1rem);
+            background-color: $pastel_blue;
+            justify-content: center;
+            margin: 0;
+            @include min-weight(915){
+                @include grid_columns(4, 1fr, 1rem);
+                background-color: $pastel_blue;
+                filter: saturate(0.7);
+            }
+        }
+
         .content_1{
             @extend %content_1;
         }
         .content_2{
             @extend %content_2;
-
+            .hamburguer_button{
+                @extend %hamburguer_button;
+            }
             ul.list_ul{
                 @extend %ul_header;
                 li{
                     @extend %li_header;
                 }
             }
-        }
-        @include orientationAndMax(portrait, tablet){
-                @include min-weight(540){
-                background-color: $pastel_blue;
-                @include grid_columns(3, 1fr, 1rem);
-                justify-content: center;
-                align-items: center;
-            }
-        }
-        @include orientationAndMax(portrait, smarthphone){
-            background-color: $pastel_blue;
-            @include grid_columns(3, 1fr, 1rem);
-            justify-content: end;
-            align-items: center;
-            .content_2{
-
-                .hamburguer_button{
-                    @include line(true);
-                    position: relative;
-                    cursor: pointer;
-                    &::before{
-                        content: '';
-                        @include line();
-                        top: 200%;
-                    }
-                    &::after{
-                        content: '';
-                        @include line();
-                        bottom:200%;
-                    }
-                    &.active{
-                        width: 2rem;
-                        &::before{
-                            width: 2rem;
-                        }
-                        &::after{
-                            width: 2rem;
-                        }
-                    }
-                }
-            }
-        }
-        @include orientationAndMax(landscape, desktop){
-            @include grid_columns(4, 1fr, 1rem);
-            background-color: $pastel_blue;
-            filter: saturate(0.7);
-        }
-        @include orientationAndMax(landscape, smarthphone){
-            @include max-weight(915){
-            @include min-weight(667){
-                @include grid_columns(3, 1fr, 1rem);
-                background-color: $pastel_blue;
-                justify-content: center;
-                margin: 0;
-            }}
         }
     }
 }

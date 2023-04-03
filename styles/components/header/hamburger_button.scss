@@ -1,0 +1,35 @@
+
+$properties:(
+    position: relative,
+    cursor: pointer,
+    before:(
+        content: '',
+        top: 200%
+    ),
+    after:(
+        content: '',
+        bottom: 200%
+    ),
+    active:(
+        width: 2rem,
+        before:(
+            width: 2rem
+        ),
+        after:(
+            width: 2rem
+        )
+    )
+);
+
+%hamburguer_button{
+    @include orientationAndMax(portrait, smarthphone){
+        @include line(true);
+        &::before{
+            @include line();
+        }
+        &::after{
+            @include line();
+        }
+        @include runingMap($properties);
+    }
+}

@@ -1,24 +1,6 @@
-.container_card{
-    display: grid;
-    @include max-weight(500){
-        display: flex;
-        flex-direction: column;
-    }
-    justify-content: center;
-    align-items: center;
-    background: linear-gradient( to right ,$gold, $white);
-    width: 90vw;
-    margin: 1rem;
-    border: 4px solid $black;
-    border-radius: 1rem;
-    @include min-weight(900){
-        width: 70vw;
-    }
-    @include min-weight(1200){
-        width: 50vw;
-    }
-    .container_text{
-        @include grid-column(1, 2);
+
+%container_text{
+    @include grid-column(1, 2);
         display: flex;
         width: 1fr;
         padding-left: 2rem;
@@ -64,7 +46,31 @@
                 $font-size: $font-large;
             }
         }
+}
+
+.container_card{
+    @include max-weight(500){
+        display: flex;
+        flex-direction: column;
     }
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient( to right ,$gold, $white);
+    width: 90vw;
+    margin: 1rem;
+    border: 4px solid $black;
+    border-radius: 1rem;
+    @include min-weight(900){
+        width: 70vw;
+    }
+    @include min-weight(1200){
+        width: 50vw;
+    }
+    .container_text{
+        @extend %container_text;
+    }
+
     .container_image{
         @include grid-column(2, 3);
         width: 100%;
