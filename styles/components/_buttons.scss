@@ -8,7 +8,13 @@
 }
 
 #div_button{
-    width: 100%;
+    @include grid-column(7, 11);
+    @include min-weight(700){
+        @include grid-column(6, 10);
+    }
+    @include min-weight(900){
+        @include grid-column(5, 9);
+    }
     // height: 2rem;
     display: flex;
     justify-content: flex-end;

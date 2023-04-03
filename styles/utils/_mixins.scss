@@ -12,6 +12,21 @@
         }
     }
 };
+@mixin grid-rows($rows, $size, $gap: null){
+    @if type-of($rows) == number and unit($size) == 'px' or
+    unit($size) == 'em' or unit($size) == 'rem' or unit($size) == '%'
+    or unit($size) == 'fr'
+    {
+        grid-template: {
+            rows:columns($rows, $size);
+        }
+    }
+    @if $gap != null{
+        grid-row: {
+            gap:$gap;
+        }
+    }
+};
 
 
 @mixin orientationAndMax($orientation, $size){
@@ -87,6 +102,18 @@
     }
     @else if type-of($first) == number and $end == null and $span == null{
         grid-column: $first;
+    }
+}
+
+@mixin grid-row($first, $end: null, $span: null){
+    @if type-of($first) == number and type-of($end) == number and $span == null{
+        grid-row: unquote('#{$first}/ #{$end}');
+    }
+    @else if type-of($first) == number and type-of($end) == number and $span != null{
+        grid-row: unquote('#{$first}  / span #{$end}');
+    }
+    @else if type-of($first) == number and $end == null and $span == null{
+        grid-row: $first;
     }
 }
 
